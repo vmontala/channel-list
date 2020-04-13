@@ -4,6 +4,7 @@
   "main": "src/index.tsx",
   "license": "Apache-2.0",
   "version": "0.1.0",
+  "node": "v13.9.0",
   "private": true,
   "bugs": {
     "url": "https://github.com/vmontala/channel-list/issues"
@@ -29,6 +30,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
+    "husky": "^4.2.5",
     "typescript": "~3.7.2"
   },
   "scripts": {
@@ -36,6 +38,11 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "lint": "eslint src/*.ts src/*.tsx"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
   },
   "browserslist": {
     "production": [
