@@ -2,7 +2,8 @@ html {
   font-size: 10px;
   font-family: sans-serif;
   color: var(--c-text);
-  background-color: var(--c-bkg-page)
+  background-color: var(--c-bkg-page);
+  scroll-behavior: smooth;
 }
 
 body {

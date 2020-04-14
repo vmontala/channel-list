@@ -1,43 +1,54 @@
 import React from 'react';
 import './Pagination.css';
 
-function Pagination() {
+interface Props {
+  current: number,
+  pages: number[],
+  onClickPage: (page: number) => void,
+}
+
+const Pagination: React.FC<Props> = ({
+  current,
+  pages,
+  onClickPage,
+}) => {
+  const firstPage = pages[0];
+  const lastPage = pages[pages.length - 1];
+
+  const renderButton = (
+    pageNumber: number,
+    currentClassModifier: string,
+    ariaLabel?: string,
+    text?: string
+  ) => {
+    const classModifier = current === pageNumber
+      ? ` pagination__action--${currentClassModifier}`
+      : '';
+
+    return (
+      <button
+        className={`pagination__action${classModifier}`}
+        type="button"
+        onClick={() => onClickPage(pageNumber)}
+        aria-label={ariaLabel || `Page ${pageNumber}`}
+        disabled={current === pageNumber}
+      >
+        {text || pageNumber}
+      </button>
+    );
+  }
+
   return (
     <nav className="pagination">
-      <button className="pagination__action pagination__action--inactive" type="button" aria-label="First page" disabled>«</button>
+      {renderButton(firstPage, 'inactive', 'First Page', '«')}
       <ol className="pagination__page-list">
-        <li className="pagination__page-item">
-          <button className="pagination__action pagination__action--active" type="button" aria-label="Page 1" disabled>1</button>
-        </li>
-        <li className="pagination__page-item">
-          <button className="pagination__action" type="button" aria-label="Page 2">2</button>
-        </li>
-        <li className="pagination__page-item">
-          <button className="pagination__action" type="button" aria-label="Page 3">3</button>
-        </li>
-        <li className="pagination__page-item">
-          <button className="pagination__action" type="button" aria-label="Page 4">4</button>
-        </li>
-        <li className="pagination__page-item">
-          <button className="pagination__action" type="button" aria-label="Page 5">5</button>
-        </li>
-        <li className="pagination__page-item">
-          <button className="pagination__action" type="button" aria-label="Page 6">6</button>
-        </li>
-        <li className="pagination__page-item">
-          <button className="pagination__action" type="button" aria-label="Page 7">7</button>
-        </li>
-        <li className="pagination__page-item">
-          <button className="pagination__action" type="button" aria-label="Page 8">8</button>
-        </li>
-        <li className="pagination__page-item">
-          <button className="pagination__action" type="button" aria-label="Page 9">9</button>
-        </li>
-        <li className="pagination__page-item">
-          <button className="pagination__action" type="button" aria-label="Page 10">10</button>
-        </li>
+        {pages.map(page => (
+          <li className="pagination__page-item" key={page}>
+            {renderButton(page, 'active')}
+          </li>
+        ))}
       </ol>
-      <button className="pagination__action" type="button" aria-label="Last page">»</button>
+      {renderButton(lastPage, 'inactive', 'Last Page', '»')}
     </nav>
   );
 }
