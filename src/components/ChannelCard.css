@@ -3,6 +3,7 @@
   background-color: var(--c-bkg);
   cursor: pointer;
   margin-bottom: var(--s-md);
+  width: 100%;
 }
 
 .channel-card--active .channel-card__select::after {
@@ -65,6 +66,13 @@
 
 @media screen and (min-width: 992px) {
   .channel-card__logo {
+    font-size: var(--fs-xl);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .channel-card__logo {
     font-size: 1vw;
+    word-break: break-word;
   }
 }
