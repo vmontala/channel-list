@@ -1,5 +1,6 @@
 import { RawChannel } from '../types/RawChannel';
 import getRandomColor from './colors';
+import channelList from '../data/channel-list';
 
 const parseChannel = (channel: RawChannel) => ({
   ...channel,
@@ -16,4 +17,6 @@ const parseChannels = (channels: RawChannel[]) => (
   })
 );
 
-export default parseChannels;
+const getChannelList = () => parseChannels(channelList);
+
+export default getChannelList;
