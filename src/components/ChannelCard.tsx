@@ -5,12 +5,12 @@ import { ParsedChannel } from '../types/ParsedChannel';
 
 interface Props {
   channel: ParsedChannel,
-  onSelectChannel: (key: string) => void,
+  toggleChannel: (key: string) => void,
 };
 
 const ChannelCard: FC<Props> = ({
   channel,
-  onSelectChannel,
+  toggleChannel,
 }) => {
   const activeClassName = channel.active ? ' channel-card--active' : '';
   const logoStyles: CSS.Properties = {
@@ -24,7 +24,7 @@ const ChannelCard: FC<Props> = ({
       aria-checked={channel.active || false}
       tabIndex={0}
       aria-label={`Channel ${channel.label}`}
-      onClick={() => onSelectChannel(channel.key)}
+      onClick={() => toggleChannel(channel.key)}
     >
       <div className="channel-card__logo" style={logoStyles}>
         {channel.label}

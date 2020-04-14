@@ -5,12 +5,12 @@ import ChannelCard from './ChannelCard';
 
 interface Props {
   channels: ParsedChannel[],
-  onSelectChannel: (key: string) => void,
+  toggleChannel: (key: string) => void,
 };
 
 const ChannelList: FC<Props> = ({
   channels,
-  onSelectChannel,
+  toggleChannel,
 }) => {
   return (
     <section className="channel-list">
@@ -18,7 +18,7 @@ const ChannelList: FC<Props> = ({
         <ChannelCard
           key={channel.key}
           channel={channel}
-          onSelectChannel={onSelectChannel}
+          toggleChannel={toggleChannel}
         />
       )}
     </section>

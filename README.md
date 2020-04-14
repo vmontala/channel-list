@@ -1,4 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# List of channels
+
+## Decisions/Thoughts
+- Used react hooks, felt like a nice opportunity to try them out
+- I've considered using context to share state between the application, although I discarded it as it seemed a bit overkill given the complexity/boilerplate
+- Implemented a basic design with some responsive functionalities, pagination is the most flawed of those adaptations (read more below)
+- Tried to keep functions as pure as possible although in lots of cases it didn't make sense
+- Aimed for "good" accessibility
+- Code may seem a bit verbose, it's intentional
+- Kept in mind to follow as much ES6+ stuff as possible, yet again most of functionalities are not going to improve the code substantially
+- I thought about implementing a lazy-loading, and even tho it'd _feel_ nice, it wouldn't make sense on a real life application of this type (just think about implementing persistent pagination over a remote API)
+- I discarded the idea of improving the pagination as it'd increase a lot the code complexity and it's out of scope so far
+- I believe on client-side caching (hence the `sessionStorage`), but also it made sense as there are calculated colors on application mount
+- gone for grid instead of flex as there's no browser limitation, also seems to fit better the needs (keeping in mind that grid keeps size consistency regardless the amount of items without any magic numbers around)
+- Used css variables everywhere I've seen fit, although sadly they cannot be used everywhere (_yet_?)
+
+## Next steps
+- I wanted to include a router to track the current page and filter status based on the query parameters
+- Definitely improve the pagination, hiding items far from the current page on smaller devices
+- Maybe some small redesign, changing some colors in order to improve contrast (background/foreground)
+- Search UX is pretty basic (therefore quite improvable) also
+- It was unclear if the first/last pagination item were previous/next page (usually one arrow) or first/last page (usually two arrows), it should be checked
+- In case of implementing router, a nice functionality would be to have some "featured" items to be displayed first/bolder
+- Another nice functionality would be some sort of "cart" where to keep track of all selected items
 
 ## Available Scripts
 
@@ -15,25 +38,9 @@ You will also see any lint errors in the console.
 ### `yarn build`
 
 Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The build is minified and the filenames include the hashes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `yarn lint`
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Lints the app source code to find inconsistencies.

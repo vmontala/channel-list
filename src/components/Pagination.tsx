@@ -4,17 +4,28 @@ import './Pagination.css';
 interface Props {
   current: number,
   pages: number[],
-  onClickPage: (page: number) => void,
+  changePage: (page: number) => void,
 };
 
 const Pagination: FC<Props> = ({
   current,
   pages,
-  onClickPage,
+  changePage,
 }) => {
   const firstPage = pages[0];
   const lastPage = pages[pages.length - 1];
 
+  /**
+   * Renders a pagination button, either first/last or any of the pages.
+   * The button is disabled in case of referring to the current page.
+   *
+   * @param {number} pageNumber - Page that the button refers to.
+   * @param {string} currentClassModifier - Class to be added as modifier in case the button refers to the current page (active|inactive).
+   * @param {string} [ariaLabel] - Custom aria-label property value, default is "Page <pageNumber>".
+   * @param {string} [text] - Custom text to show on the button, default is "<pageNumber>".
+   *
+   * @returns {ReactElement}
+   */
   const renderButton = (
     pageNumber: number,
     currentClassModifier: string,
@@ -29,7 +40,7 @@ const Pagination: FC<Props> = ({
       <button
         className={`pagination__action${classModifier}`}
         type="button"
-        onClick={() => onClickPage(pageNumber)}
+        onClick={() => changePage(pageNumber)}
         aria-label={ariaLabel || `Page ${pageNumber}`}
         disabled={current === pageNumber}
       >

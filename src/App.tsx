@@ -21,23 +21,35 @@ const App = () => {
     country: 'All Countries',
   });
 
+  /**
+   * When the search filters change all channels get filtered, pagination is regenerated and page
+   * is set back to the default.
+   */
   useEffect(
     () => {
       const filteredChannels = filterChannels(allChannels, searchFilters);
 
       setCurrentPage(1);
-      setChannels(getChannelsByPage(filteredChannels, 1));
       setPageList(generatePages(filteredChannels));
+      setChannels(getChannelsByPage(filteredChannels, 1));
     },
     [searchFilters],
   );
 
+  // When the current page changes the visible channels change accordingly.
   useEffect(
     () => setChannels(getChannelsByPage(allChannels, currentPage)),
     [currentPage],
   );
 
-  const onSelectChannel = (key: string) => {
+  /**
+   * Triggered when a channel is toggled, it updates the list of all channels and re-renders it.
+   *
+   * @param {string} key - Channel key.
+   *
+   * @returns {undefined}
+   */
+  const toggleChannel = (key: string) => {
     const channel = allChannels.find((item: ParsedChannel) => item.key === key);
 
     if (channel) {
@@ -50,7 +62,15 @@ const App = () => {
     setChannels(getChannelsByPage(filteredChannels, currentPage));
   };
 
-  const onClickPage = (page: number) => {
+  /**
+   * Triggered when a page changes, it sets it on the component state.
+   * Also scrolls to the top of the page (necessary on smaller devices with forced scroll).
+   *
+   * @param {number} page - Page to change to.
+   *
+   * @returns {undefined}
+   */
+  const changePage = (page: number) => {
     window.scroll({
       top: 0,
       behavior: 'smooth',
@@ -59,6 +79,13 @@ const App = () => {
     setCurrentPage(page);
   };
 
+  /**
+   * Triggered when a filter changes, it overrides it on the component state.
+   *
+   * @param {object} filter - Filter object to spread into the previous set ones.
+   *
+   * @returns {undefined}
+   */
   const onFilter = (filter: object) => {
     setSearchFilters({
       ...searchFilters,
@@ -66,6 +93,11 @@ const App = () => {
     });
   };
 
+  /**
+   * Renders either an empty list component or the channel list and pagination.
+   *
+   * @returns {ReactElement} - Empty list or channel list and pagination.
+   */
   const renderList = () => {
     if (!channels.length) {
       return <EmptyList />;
@@ -75,12 +107,12 @@ const App = () => {
       <>
         <ChannelList
           channels={channels}
-          onSelectChannel={onSelectChannel}
+          toggleChannel={toggleChannel}
         />
         <Pagination
           current={currentPage}
           pages={pageList}
-          onClickPage={onClickPage}
+          changePage={changePage}
         />
       </>
     );

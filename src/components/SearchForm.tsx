@@ -8,6 +8,12 @@ interface Props {
 const SearchForm: FC<Props> = ({
   onFilter,
 }) => {
+  /**
+   * Triggered when submitting the search form that includes the search term input.
+   * Prevents page refresh and sets the term filter on higher scope.
+   *
+   * @param {FormEvent} event - Submit event triggered on the form level.
+   */
   const onSearch = (event: FormEvent<HTMLFormElement>) => {
     const element = event.currentTarget.elements!.namedItem('search-term');
 
@@ -18,10 +24,14 @@ const SearchForm: FC<Props> = ({
     }
   };
 
+  /**
+   * Triggered when changing the country select.
+   * Sets the term filter on higher scope.
+   *
+   * @param {FormEvent} event - Change event triggered on the select level.
+   */
   const onChangeCountry = (event: ChangeEvent<HTMLSelectElement>) => {
     const element = event.currentTarget;
-
-    event.preventDefault();
 
     if (element) {
       onFilter({ country: element.value });
