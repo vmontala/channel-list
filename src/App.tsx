@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from './components/SearchForm';
 import ChannelList from './components/ChannelList';
+import EmptyList from './components/EmptyList';
 import Pagination from './components/Pagination';
 import './App.css';
 import { ParsedChannel } from './types/ParsedChannel';
@@ -52,11 +53,23 @@ const App = () => {
     });
   };
 
+  const renderList = () => {
+    if (!channels.length) {
+      return <EmptyList />;
+    }
+
+    return (
+      <>
+        <ChannelList channels={channels} />
+        <Pagination current={currentPage} pages={pageList} onClickPage={onClickPage} />
+      </>
+    );
+  };
+
   return (
     <main className="app">
       <SearchForm onFilter={onFilter} />
-      <ChannelList channels={channels} />
-      <Pagination current={currentPage} pages={pageList} onClickPage={onClickPage} />
+      {renderList()}
     </main>
   );
 };

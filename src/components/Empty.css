@@ -1,0 +1,7 @@
+.empty-list {
+  padding: var(--s-xl);
+  text-align: center;
+  color: var(--c-text-inactive);
+  font-size: var(--s-lg);
+  font-style: italic;
+}
