@@ -1,25 +1,23 @@
 import React from 'react';
 import './ChannelList.css';
 import ChannelCard from './ChannelCard';
+import { ParsedChannel } from '../types/ParsedChannel';
 
-function ChannelList() {
+interface Props {
+  channels: ParsedChannel[],
+}
+
+const ChannelList: React.FC<Props> = ({
+  channels,
+}) => {
   return (
     <section className="channel-list">
-      <ChannelCard active={true}/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
-      <ChannelCard/>
+      {channels.map((channel, index) =>
+        <ChannelCard
+          key={`${channel.key}-${index}`}
+          channel={channel}
+        />
+      )}
     </section>
   );
 }
