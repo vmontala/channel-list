@@ -1,0 +1,50 @@
+:root {
+  /* SPACING */
+  --s-xs: .4rem;
+  --s-sm: .8rem;
+  --s-md: 1.6rem;
+  --s-lg: 3.2rem;
+  --s-xl: 4rem;
+
+  /* FONTS */
+  --fs-sm: .8rem;
+  --fs-md: 1.6rem;
+  --fs-lg: 3.2rem;
+
+  /* COLOURS */
+  --c-text: #7F7F7F;
+  --c-text-active: #63B2D4;
+  --c-text-inactive: #B7B7B7;
+  --c-text-contrast: #FFFFFF;
+
+  --c-bkg: #FFFFFF;
+  --c-bkg-card: #DCDCDC;
+  --c-bkg-page: #F9F9F9;
+  --c-bkg-active: #3D99DD;
+  --c-bkg-inactive: #F2F2F2;
+  --c-bkg-hover: #EBF5FA;
+
+  --c-border: #D3D3D3;
+  --c-border-focus: #3D99DD;
+
+  --c-interactive: #5B595B;
+
+  /* BORDERS */
+  --border: 1px solid var(--c-border);
+}
+
+@media (min-width: 768px) {
+  :root {
+    /* STRUCTURE */
+    --card-list-cols: 3;
+    --card-list-rows: 5;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    /* STRUCTURE */
+    --card-list-cols: 5;
+    --card-list-rows: 3;
+  }
+}

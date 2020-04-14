@@ -1,0 +1,32 @@
+html {
+  font-size: 10px;
+  font-family: sans-serif;
+  color: var(--c-text);
+  background-color: var(--c-bkg-page)
+}
+
+body {
+  font-size: var(--fs-md);
+}
+
+input,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+input:hover,
+input:focus,
+button:hover,
+button:focus,
+select:hover,
+select:focus {
+  outline: 0;
+  background-color: var(--c-bkg-hover);
+}
+
+button {
+  cursor: pointer;
+}

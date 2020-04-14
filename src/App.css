@@ -1,5 +1,11 @@
 .app {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px;
+  padding: var(--s-md);
+}
+
+@media screen and (min-width: 768px) {
+  .app {
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: var(--s-xl);
+  }
 }

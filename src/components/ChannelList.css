@@ -1,0 +1,7 @@
+.channel-list {
+  display: grid;
+  grid-template-columns: repeat(var(--card-list-cols), 1fr);
+  grid-template-rows: repeat(var(--card-list-rows), 1fr);
+  gap: var(--s-md);
+  margin-bottom: var(--s-lg);
+}
