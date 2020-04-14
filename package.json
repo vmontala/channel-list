@@ -3,7 +3,7 @@
   "description": "List of Channels built with React and TypeScript",
   "main": "src/index.tsx",
   "license": "Apache-2.0",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "node": "v13.9.0",
   "private": true,
   "bugs": {
