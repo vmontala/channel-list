@@ -37,6 +37,18 @@ const App = () => {
     [currentPage],
   );
 
+  const onSelectChannel = (key: string) => {
+    const channel = allChannels.find((item) => item.key === key);
+
+    if (channel) {
+      channel.active = !channel.active;
+    }
+
+    const filteredChannels = filterChannels(allChannels, searchFilters);
+
+    setChannels(getChannelsByPage(filteredChannels, currentPage));
+  };
+
   const onClickPage = (page: number) => {
     window.scroll({
       top: 0,
@@ -60,7 +72,10 @@ const App = () => {
 
     return (
       <>
-        <ChannelList channels={channels} />
+        <ChannelList
+          channels={channels}
+          onSelectChannel={onSelectChannel}
+        />
         <Pagination
           current={currentPage}
           pages={pageList}

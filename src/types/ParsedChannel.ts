@@ -3,4 +3,5 @@ export type ParsedChannel = {
   label: string,
   country: string,
   color: string,
+  active: boolean,
 };
