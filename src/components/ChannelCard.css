@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--fs-lg);
+  font-size: 1vw;
   font-weight: bold;
 }
 

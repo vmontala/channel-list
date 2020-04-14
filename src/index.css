@@ -17,16 +17,16 @@ select {
   color: inherit;
 }
 
-input:hover,
-input:focus,
-button:hover,
-button:focus,
-select:hover,
-select:focus {
+input:not([disabled]):hover,
+input:not([disabled]):focus,
+button:not([disabled]):hover,
+button:not([disabled]):focus,
+select:not([disabled]):hover,
+select:not([disabled]):focus {
   outline: 0;
   background-color: var(--c-bkg-hover);
 }
 
-button {
+button:not([disabled]) {
   cursor: pointer;
 }

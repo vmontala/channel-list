@@ -9,7 +9,7 @@ const ChannelCard: React.FC<Props> = ({
   active,
 }) => {
   return (
-    <article className={`channel-card${active ? ' channel-card--active' : ''}`}>
+    <article className={`channel-card${active ? ' channel-card--active' : ''}`} role="checkbox" aria-checked="false" tabIndex={0} aria-label="Channel Channel Title">
       <div className="channel-card__logo">
         channel-key
       </div>

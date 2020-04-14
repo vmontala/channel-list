@@ -29,7 +29,7 @@
 .search-filters__button,
 .search-filters__select {
   color: var(--c-interactive);
-  background-color: var(--c-white);
+  background-color: var(--c-bkg);
 }
 
 .search-filters__input,

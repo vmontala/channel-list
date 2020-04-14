@@ -4,7 +4,7 @@ import ChannelCard from './ChannelCard';
 
 function ChannelList() {
   return (
-    <div className="channel-list">
+    <section className="channel-list">
       <ChannelCard active={true}/>
       <ChannelCard/>
       <ChannelCard/>
@@ -20,7 +20,7 @@ function ChannelList() {
       <ChannelCard/>
       <ChannelCard/>
       <ChannelCard/>
-    </div>
+    </section>
   );
 }
 
