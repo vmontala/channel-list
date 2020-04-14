@@ -1,4 +1,5 @@
 import { RawChannel } from '../types/RawChannel';
+import { ParsedChannel } from '../types/ParsedChannel';
 import getRandomColor from './colors';
 import channelList from '../data/channel-list';
 
@@ -19,6 +20,23 @@ const parseChannels = (channels: RawChannel[]) => (
   })
 );
 
-const getChannelList = () => parseChannels(channelList);
+const loadChannels = () => window.sessionStorage.getItem('channelList');
 
-export default getChannelList;
+export const storeChannels = (channels: ParsedChannel[]) => (
+  window.sessionStorage.setItem('channelList', JSON.stringify(channels))
+);
+
+export const getChannelList = () => {
+  const storedChannels = loadChannels();
+  let channels = null;
+
+  if (storedChannels) {
+    channels = JSON.parse(storedChannels);
+  } else {
+    channels = parseChannels(channelList);
+
+    storeChannels(channels);
+  }
+
+  return channels;
+};

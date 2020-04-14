@@ -6,7 +6,7 @@ import SearchForm from './components/SearchForm';
 import ChannelList from './components/ChannelList';
 import EmptyList from './components/EmptyList';
 import Pagination from './components/Pagination';
-import getChannelList from './utils/channels';
+import { getChannelList, storeChannels } from './utils/channels';
 import filterChannels from './utils/filters';
 import { generatePages, getChannelsByPage } from './utils/pagination';
 
@@ -38,10 +38,11 @@ const App = () => {
   );
 
   const onSelectChannel = (key: string) => {
-    const channel = allChannels.find((item) => item.key === key);
+    const channel = allChannels.find((item: ParsedChannel) => item.key === key);
 
     if (channel) {
       channel.active = !channel.active;
+      storeChannels(allChannels);
     }
 
     const filteredChannels = filterChannels(allChannels, searchFilters);
