@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SearchFilters from './components/SearchFilters';
+import SearchForm from './components/SearchForm';
 import ChannelList from './components/ChannelList';
 import Pagination from './components/Pagination';
 import './App.css';
@@ -9,8 +9,9 @@ import { generatePages, getChannelsByPage } from './utils/pagination';
 
 const App = () => {
   const channels = parseChannels(channelList);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const pageList = generatePages(channels);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const onClickPage = (page: number) => {
     window.scroll({
@@ -23,7 +24,7 @@ const App = () => {
 
   return (
     <main className="app">
-      <SearchFilters />
+      <SearchForm />
       <ChannelList channels={getChannelsByPage(channels, currentPage)} />
       <Pagination current={currentPage} pages={pageList} onClickPage={onClickPage} />
     </main>
