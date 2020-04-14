@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { FC } from 'react';
+import CSS from 'csstype';
 import './ChannelCard.css';
 import { ParsedChannel } from '../types/ParsedChannel';
-import CSS from 'csstype';
 
 interface Props {
   channel: ParsedChannel,
   active?: boolean,
-}
+};
 
-const ChannelCard: React.FC<Props> = ({
+const ChannelCard: FC<Props> = ({
   channel,
   active,
 }) => {
+  const activeClassName = active ? ' channel-card--active' : '';
   const logoStyles: CSS.Properties = {
     backgroundColor: channel.color,
   };
 
   return (
     <article
-      className={`channel-card${active ? ' channel-card--active' : ''}`}
+      className={`channel-card${activeClassName}`}
       role="checkbox"
       aria-checked={active || false}
       tabIndex={0}
@@ -33,6 +34,6 @@ const ChannelCard: React.FC<Props> = ({
       </div>
     </article>
   );
-}
+};
 
 export default ChannelCard;

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
+import { ParsedChannel } from './types/ParsedChannel';
+import { SearchFilters } from './types/SearchFilters';
 import SearchForm from './components/SearchForm';
 import ChannelList from './components/ChannelList';
 import EmptyList from './components/EmptyList';
 import Pagination from './components/Pagination';
-import './App.css';
-import { ParsedChannel } from './types/ParsedChannel';
-import { SearchFilters } from './types/SearchFilters';
 import getChannelList from './utils/channels';
 import filterChannels from './utils/filters';
 import { generatePages, getChannelsByPage } from './utils/pagination';
@@ -61,7 +61,11 @@ const App = () => {
     return (
       <>
         <ChannelList channels={channels} />
-        <Pagination current={currentPage} pages={pageList} onClickPage={onClickPage} />
+        <Pagination
+          current={currentPage}
+          pages={pageList}
+          onClickPage={onClickPage}
+        />
       </>
     );
   };

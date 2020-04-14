@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './ChannelList.css';
-import ChannelCard from './ChannelCard';
 import { ParsedChannel } from '../types/ParsedChannel';
+import ChannelCard from './ChannelCard';
 
 interface Props {
   channels: ParsedChannel[],
-}
+};
 
-const ChannelList: React.FC<Props> = ({
+const ChannelList: FC<Props> = ({
   channels,
 }) => {
   return (
@@ -20,6 +20,6 @@ const ChannelList: React.FC<Props> = ({
       )}
     </section>
   );
-}
+};
 
 export default ChannelList;

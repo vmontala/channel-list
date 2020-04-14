@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Pagination.css';
 
 interface Props {
   current: number,
   pages: number[],
   onClickPage: (page: number) => void,
-}
+};
 
-const Pagination: React.FC<Props> = ({
+const Pagination: FC<Props> = ({
   current,
   pages,
   onClickPage,
@@ -36,7 +36,7 @@ const Pagination: React.FC<Props> = ({
         {text || pageNumber}
       </button>
     );
-  }
+  };
 
   return (
     <nav className="pagination">

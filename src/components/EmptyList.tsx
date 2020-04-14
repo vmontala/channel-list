@@ -7,6 +7,6 @@ const Empty = () => {
       No channels found
     </section>
   );
-}
+};
 
 export default Empty;

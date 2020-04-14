@@ -3,7 +3,7 @@ import './SearchForm.css';
 
 interface Props {
   onFilter: (filter: object) => void,
-}
+};
 
 const SearchForm: FC<Props> = ({
   onFilter,
@@ -36,10 +36,14 @@ const SearchForm: FC<Props> = ({
           className="search-form__input"
           placeholder="Search for channels, e.g. Google"
         />
-        <button className="search-form__button" type="submit">Search</button>
+        <button className="search-form__button" type="submit">
+          Search
+        </button>
       </form>
       <div className="search-form__filter">
-        <label className="search-form__label" htmlFor="country-filter">Country</label>
+        <label className="search-form__label" htmlFor="country-filter">
+          Country
+        </label>
         <div className="search-form__select-container">
           <select
             className="search-form__select"
@@ -55,6 +59,6 @@ const SearchForm: FC<Props> = ({
       </div>
     </section>
   );
-}
+};
 
 export default SearchForm;
