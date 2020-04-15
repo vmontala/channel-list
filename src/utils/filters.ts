@@ -1,5 +1,6 @@
 import { ParsedChannel } from '../types/ParsedChannel';
 import { SearchFilters } from '../types/SearchFilters';
+import { ALL_COUNTRIES } from '../config';
 
 /**
  * Filters the given channels using the given criteria.
@@ -16,7 +17,7 @@ const filterChannels = (
   channels.filter((channel) => {
     const { country } = filters;
     const termMatch = channel.label.indexOf(filters.term) !== -1;
-    const countryMatch = country === 'All Countries' || country === channel.country;
+    const countryMatch = country === ALL_COUNTRIES || country === channel.country;
 
     return termMatch && countryMatch;
   })

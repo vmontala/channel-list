@@ -1,5 +1,7 @@
 import React, { FC, FormEvent, ChangeEvent} from 'react';
 import './SearchForm.css';
+import { ALL_COUNTRIES, DEFAULT_COUNTRY } from '../config';
+import countries from '../data/countries';
 
 interface Props {
   onFilter: (filter: object) => void,
@@ -58,12 +60,18 @@ const SearchForm: FC<Props> = ({
           <select
             className="search-form__select"
             id="country-filter"
-            defaultValue={'All Countries'}
+            defaultValue={DEFAULT_COUNTRY}
             onChange={onChangeCountry}
           >
-            <option>All Countries</option>
-            <option value="NL">The Netherlands</option>
-            <option value="ES">Spain</option>
+            <option>{ALL_COUNTRIES}</option>
+            {countries.map(country => (
+              <option
+                key={country.key || country.label}
+                value={country.key || country.label}
+              >
+                {country.label}
+              </option>
+            ))}
           </select>
         </div>
       </div>

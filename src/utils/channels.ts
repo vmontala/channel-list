@@ -1,5 +1,6 @@
 import { RawChannel } from '../types/RawChannel';
 import { ParsedChannel } from '../types/ParsedChannel';
+import { CHANNEL_STORAGE_KEY } from '../config'
 import generateColor from './colors';
 import channelList from '../data/channel-list';
 
@@ -40,7 +41,7 @@ const parseChannels = (channels: RawChannel[]) => (
  *
  * @returns {ParsedChannel[]} - Stored channel objects list.
  */
-const loadChannels = () => window.sessionStorage.getItem('channelList');
+const loadChannels = () => window.sessionStorage.getItem(CHANNEL_STORAGE_KEY);
 
 /**
  * Stores the parsed and sorted channel objects list to the session storage.
@@ -50,7 +51,7 @@ const loadChannels = () => window.sessionStorage.getItem('channelList');
  * @returns {undefined}
  */
 export const storeChannels = (channels: ParsedChannel[]) => (
-  window.sessionStorage.setItem('channelList', JSON.stringify(channels))
+  window.sessionStorage.setItem(CHANNEL_STORAGE_KEY, JSON.stringify(channels))
 );
 
 /**

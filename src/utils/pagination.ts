@@ -1,6 +1,5 @@
 import { ParsedChannel } from '../types/ParsedChannel';
-
-const channelsPerPage = 15;
+import { CHANNELS_PER_PAGE } from '../config'
 
 /**
  * Generates a list of pages based on the amount of channels to display.
@@ -11,7 +10,7 @@ const channelsPerPage = 15;
  */
 export const generatePages = (channels: ParsedChannel[]) => {
   const pages = [];
-  const pageAmount = Math.ceil(channels.length / channelsPerPage);
+  const pageAmount = Math.ceil(channels.length / CHANNELS_PER_PAGE);
 
   for(let page = 1; page <= pageAmount; page += 1) {
     pages.push(page);
@@ -29,5 +28,5 @@ export const generatePages = (channels: ParsedChannel[]) => {
  * @returns {ParsedChannel[]} - Subset of channels corresponding to the current page.
  */
 export const getChannelsByPage = (channels: ParsedChannel[], page: number) => (
-  channels.slice(channelsPerPage * (page - 1), channelsPerPage * page)
+  channels.slice(CHANNELS_PER_PAGE * (page - 1), CHANNELS_PER_PAGE * page)
 );

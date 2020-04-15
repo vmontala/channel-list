@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { ParsedChannel } from './types/ParsedChannel';
 import { SearchFilters } from './types/SearchFilters';
+import { DEFAULT_PAGE, DEFAULT_COUNTRY } from './config';
 import SearchForm from './components/SearchForm';
 import ChannelList from './components/ChannelList';
 import EmptyList from './components/EmptyList';
@@ -13,12 +14,12 @@ import { generatePages, getChannelsByPage } from './utils/pagination';
 const allChannels = getChannelList();
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE);
   const [channels, setChannels] = useState<ParsedChannel[]>([]);
   const [pageList, setPageList] = useState<number[]>([]);
   const [searchFilters, setSearchFilters] = useState<SearchFilters>({
     term: '',
-    country: 'All Countries',
+    country: DEFAULT_COUNTRY,
   });
 
   /**
@@ -29,17 +30,21 @@ const App = () => {
     () => {
       const filteredChannels = filterChannels(allChannels, searchFilters);
 
-      setCurrentPage(1);
+      setCurrentPage(DEFAULT_PAGE);
       setPageList(generatePages(filteredChannels));
-      setChannels(getChannelsByPage(filteredChannels, 1));
+      setChannels(getChannelsByPage(filteredChannels, DEFAULT_PAGE));
     },
     [searchFilters],
   );
 
   // When the current page changes the visible channels change accordingly.
   useEffect(
-    () => setChannels(getChannelsByPage(allChannels, currentPage)),
-    [currentPage],
+    () => {
+      const filteredChannels = filterChannels(allChannels, searchFilters);
+
+      setChannels(getChannelsByPage(filteredChannels, currentPage));
+    },
+    [currentPage, searchFilters],
   );
 
   /**
