@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, KeyboardEvent } from 'react';
 import CSS from 'csstype';
 import './ChannelCard.css';
 import { ParsedChannel } from '../types/ParsedChannel';
@@ -17,14 +17,29 @@ const ChannelCard: FC<Props> = ({
     backgroundColor: channel.color,
   };
 
+  /**
+   * Triggered when, focused on a card the user presses a key.
+   * If the key is space (' '), the channel is toggled.
+   *
+   * @param {KeyboardEvent} event - Keyboard event triggered on HTML element.
+   *
+   * @returns {undefined}
+   */
+  const onKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === ' ') {
+      toggleChannel(channel.key);
+    }
+  };
+
   return (
     <article
       className={`channel-card${activeClassName}`}
       role="checkbox"
-      aria-checked={channel.active || false}
+      aria-checked={channel.active}
       tabIndex={0}
       aria-label={`Channel ${channel.label}`}
       onClick={() => toggleChannel(channel.key)}
+      onKeyPress={onKeyPress}
     >
       <div className="channel-card__logo" style={logoStyles}>
         {channel.label}
