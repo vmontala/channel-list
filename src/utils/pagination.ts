@@ -1,5 +1,5 @@
 import { ParsedChannel } from '../types/ParsedChannel';
-import { CHANNELS_PER_PAGE } from '../config'
+import { CHANNELS_PER_PAGE, VISIBLE_PAGE_OFFSET } from '../config';
 
 /**
  * Generates a list of pages based on the amount of channels to display.
@@ -23,10 +23,33 @@ export const generatePages = (channels: ParsedChannel[]): number[] => {
  * Gets the channels to be displayed on a certain page.
  *
  * @param {ParsedChannel[]} channels - List of all channels that can be displayed.
- * @param {number} page - Current page number.
+ * @param {number} current - Current page number.
  *
  * @returns {ParsedChannel[]} - Subset of channels corresponding to the current page.
  */
-export const getChannelsByPage = (channels: ParsedChannel[], page: number): ParsedChannel[] => (
-  channels.slice(CHANNELS_PER_PAGE * (page - 1), CHANNELS_PER_PAGE * page)
+export const getChannelsByPage = (channels: ParsedChannel[], current: number): ParsedChannel[] => (
+  channels.slice(CHANNELS_PER_PAGE * (current - 1), CHANNELS_PER_PAGE * current)
 );
+
+/**
+ * Generates a list of the pages that will always be visible (on all devices), based on the
+ * current page and the configured page offset).
+ *
+ * @param {number[]} pages - List of all available pages.
+ * @param {number} current - Current page number.
+ *
+ * @returns {number[]} - List of pages to be always displayed.
+ */
+export const getAlwaysDisplayedPages = (pages: number[], current: number): number[] => {
+  const minPage = current - VISIBLE_PAGE_OFFSET;
+  const maxPage = current + VISIBLE_PAGE_OFFSET;
+  const displayFrom = minPage > 0 ? minPage : 1;
+  const displayTo = maxPage < pages.length ? maxPage : pages.length;
+  const alwaysDisplayedPages = [];
+
+  for (let page = displayFrom; page <= displayTo; page += 1) {
+    alwaysDisplayedPages.push(page);
+  }
+
+  return alwaysDisplayedPages;
+};

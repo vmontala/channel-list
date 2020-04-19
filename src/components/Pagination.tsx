@@ -1,5 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import './Pagination.css';
+import { VISIBLE_PAGE_OFFSET } from '../config';
+import { getAlwaysDisplayedPages } from '../utils/pagination';
 
 interface Props {
   current: number,
@@ -14,6 +16,11 @@ const Pagination: FC<Props> = ({
 }) => {
   const firstPage = pages[0];
   const lastPage = pages[pages.length - 1];
+  const alwaysDisplayedPages = getAlwaysDisplayedPages(pages, current);
+
+  const isHiddenOnSmallerDevices = (page: number): boolean => (
+    alwaysDisplayedPages.indexOf(page) === -1
+  );
 
   /**
    * Renders a pagination button, either first/last or any of the pages.
@@ -49,15 +56,68 @@ const Pagination: FC<Props> = ({
     );
   };
 
+  /**
+   * Renders a pagination item that represents the presence of hidden pages on mobile devices.
+   *
+   * @returns {ReactElement}
+   */
+  const renderMorePages = (): ReactElement => (
+    <li
+      className='pagination__page-item pagination__page-item--more'
+      aria-label='More pages'
+    >
+      ...
+    </li>
+  );
+
+  /**
+   * Renders a the "more pages" item in case the current page is after the specified one (counting
+   * also the configured page offset).
+   *
+   * @param {number} page - Page to check against if the item shall be rendered.
+   *
+   * @returns {ReactElement || null} - It returns null in case the condition does not match.
+   */
+  const renderMorePagesAfter = (page: number): ReactElement | null => (
+    current - VISIBLE_PAGE_OFFSET <= page
+    ? null
+    : renderMorePages()
+  );
+
+  /**
+   * Renders a the "more pages" item in case the current page is before the specified one (counting
+   * also the configured page offset).
+   *
+   * @param {number} page - Page to check against if the item shall be rendered.
+   *
+   * @returns {ReactElement || null} - It returns null in case the condition does not match.
+   */
+  const renderMorePagesBefore = (page: number): ReactElement | null => (
+    current + VISIBLE_PAGE_OFFSET >= page
+    ? null
+    : renderMorePages()
+  );
+
   return (
     <nav className="pagination">
       {renderButton(firstPage, 'inactive', 'First Page', '«')}
       <ol className="pagination__page-list">
-        {pages.map((page): ReactElement => (
-          <li className="pagination__page-item" key={page}>
-            {renderButton(page, 'active')}
-          </li>
-        ))}
+        {renderMorePagesAfter(firstPage)}
+        {pages.map((page): ReactElement => {
+          const hiddenClass = isHiddenOnSmallerDevices(page)
+            ? ' pagination__page-item--hide'
+            : '';
+
+          return (
+            <li
+              key={page}
+              className={`pagination__page-item${hiddenClass}`}
+            >
+              {renderButton(page, 'active')}
+            </li>
+          );
+        })}
+        {renderMorePagesBefore(lastPage)}
       </ol>
       {renderButton(lastPage, 'inactive', 'Last Page', '»')}
     </nav>
