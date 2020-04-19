@@ -47,7 +47,11 @@ const SearchForm: FC<Props> = ({
   return (
     <section className="search-form">
       <form className="search-form__filter" onSubmit={onSearch}>
+        <label className="search-form__label" htmlFor="search-term">
+          Search term
+        </label>
         <input
+          id="search-term"
           name="search-term"
           className="search-form__input"
           placeholder="Search for channels, e.g. Google"
