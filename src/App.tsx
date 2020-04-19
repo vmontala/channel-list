@@ -52,7 +52,7 @@ const App = () => {
    *
    * @param {string} key - Channel key.
    *
-   * @returns {undefined}
+   * @returns {void}
    */
   const toggleChannel = (key: string) => {
     const channel = allChannels.find((item: ParsedChannel) => item.key === key);
@@ -73,7 +73,7 @@ const App = () => {
    *
    * @param {number} page - Page to change to.
    *
-   * @returns {undefined}
+   * @returns {void}
    */
   const changePage = (page: number) => {
     window.scroll({
@@ -89,7 +89,7 @@ const App = () => {
    *
    * @param {object} filter - Filter object to spread into the previous set ones.
    *
-   * @returns {undefined}
+   * @returns {void}
    */
   const onFilter = (filter: object) => {
     setSearchFilters({

@@ -15,6 +15,8 @@ const SearchForm: FC<Props> = ({
    * Prevents page refresh and sets the term filter on higher scope.
    *
    * @param {FormEvent} event - Submit event triggered on the form level.
+   *
+   * @returns {void}
    */
   const onSearch = (event: FormEvent<HTMLFormElement>) => {
     const element = event.currentTarget.elements!.namedItem('search-term');
@@ -31,6 +33,8 @@ const SearchForm: FC<Props> = ({
    * Sets the term filter on higher scope.
    *
    * @param {FormEvent} event - Change event triggered on the select level.
+   *
+   * @returns {void}
    */
   const onChangeCountry = (event: ChangeEvent<HTMLSelectElement>) => {
     const element = event.currentTarget;

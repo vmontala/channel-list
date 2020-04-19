@@ -48,7 +48,7 @@ const loadChannels = () => window.sessionStorage.getItem(CHANNEL_STORAGE_KEY);
  *
  * @param {ParsedChannel[]} channels - Parsed and sorted channel objects list.
  *
- * @returns {undefined}
+ * @returns {void}
  */
 export const storeChannels = (channels: ParsedChannel[]) => (
   window.sessionStorage.setItem(CHANNEL_STORAGE_KEY, JSON.stringify(channels))

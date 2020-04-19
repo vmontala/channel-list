@@ -23,7 +23,7 @@ const ChannelCard: FC<Props> = ({
    *
    * @param {KeyboardEvent} event - Keyboard event triggered on HTML element.
    *
-   * @returns {undefined}
+   * @returns {void}
    */
   const onKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === ' ') {
