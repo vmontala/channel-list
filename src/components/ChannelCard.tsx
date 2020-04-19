@@ -25,7 +25,7 @@ const ChannelCard: FC<Props> = ({
    *
    * @returns {void}
    */
-  const onKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
+  const onKeyPress = (event: KeyboardEvent<HTMLDivElement>): void => {
     if (event.key === ' ') {
       toggleChannel(channel.key);
     }
@@ -38,7 +38,7 @@ const ChannelCard: FC<Props> = ({
       aria-checked={channel.active}
       tabIndex={0}
       aria-label={`Channel ${channel.label}`}
-      onClick={() => toggleChannel(channel.key)}
+      onClick={(): void => toggleChannel(channel.key)}
       onKeyPress={onKeyPress}
     >
       <div className="channel-card__logo" style={logoStyles}>

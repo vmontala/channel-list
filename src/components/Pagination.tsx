@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import './Pagination.css';
 
 interface Props {
@@ -31,7 +31,7 @@ const Pagination: FC<Props> = ({
     currentClassModifier: string,
     ariaLabel?: string,
     text?: string
-  ) => {
+  ): ReactElement => {
     const classModifier = current === pageNumber
       ? ` pagination__action--${currentClassModifier}`
       : '';
@@ -40,7 +40,7 @@ const Pagination: FC<Props> = ({
       <button
         className={`pagination__action${classModifier}`}
         type="button"
-        onClick={() => changePage(pageNumber)}
+        onClick={(): void => changePage(pageNumber)}
         aria-label={ariaLabel || `Page ${pageNumber}`}
         disabled={current === pageNumber}
       >
@@ -53,7 +53,7 @@ const Pagination: FC<Props> = ({
     <nav className="pagination">
       {renderButton(firstPage, 'inactive', 'First Page', '«')}
       <ol className="pagination__page-list">
-        {pages.map(page => (
+        {pages.map((page): ReactElement => (
           <li className="pagination__page-item" key={page}>
             {renderButton(page, 'active')}
           </li>

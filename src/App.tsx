@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 import './App.css';
 import { ParsedChannel } from './types/ParsedChannel';
 import { SearchFilters } from './types/SearchFilters';
@@ -13,7 +13,7 @@ import { generatePages, getChannelsByPage } from './utils/pagination';
 
 const allChannels = getChannelList();
 
-const App = () => {
+const App = (): ReactElement => {
   const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE);
   const [channels, setChannels] = useState<ParsedChannel[]>([]);
   const [pageList, setPageList] = useState<number[]>([]);
@@ -27,7 +27,7 @@ const App = () => {
    * is set back to the default.
    */
   useEffect(
-    () => {
+    (): void => {
       const filteredChannels = filterChannels(allChannels, searchFilters);
 
       setCurrentPage(DEFAULT_PAGE);
@@ -39,7 +39,7 @@ const App = () => {
 
   // When the current page changes the visible channels change accordingly.
   useEffect(
-    () => {
+    (): void => {
       const filteredChannels = filterChannels(allChannels, searchFilters);
 
       setChannels(getChannelsByPage(filteredChannels, currentPage));
@@ -54,8 +54,8 @@ const App = () => {
    *
    * @returns {void}
    */
-  const toggleChannel = (key: string) => {
-    const channel = allChannels.find((item: ParsedChannel) => item.key === key);
+  const toggleChannel = (key: string): void => {
+    const channel = allChannels.find((item: ParsedChannel): boolean => item.key === key);
 
     if (channel) {
       channel.active = !channel.active;
@@ -75,7 +75,7 @@ const App = () => {
    *
    * @returns {void}
    */
-  const changePage = (page: number) => {
+  const changePage = (page: number): void => {
     window.scroll({
       top: 0,
       behavior: 'smooth',
@@ -91,7 +91,7 @@ const App = () => {
    *
    * @returns {void}
    */
-  const onFilter = (filter: object) => {
+  const onFilter = (filter: object): void => {
     setSearchFilters({
       ...searchFilters,
       ...filter,
@@ -103,7 +103,7 @@ const App = () => {
    *
    * @returns {ReactElement} - Empty list or channel list and pagination.
    */
-  const renderList = () => {
+  const renderList = (): ReactElement => {
     if (!channels.length) {
       return <EmptyList />;
     }

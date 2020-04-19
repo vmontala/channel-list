@@ -8,7 +8,7 @@ import { CHANNELS_PER_PAGE } from '../config'
  *
  * @returns {number[]} - List of page numbers.
  */
-export const generatePages = (channels: ParsedChannel[]) => {
+export const generatePages = (channels: ParsedChannel[]): number[] => {
   const pages = [];
   const pageAmount = Math.ceil(channels.length / CHANNELS_PER_PAGE);
 
@@ -27,6 +27,6 @@ export const generatePages = (channels: ParsedChannel[]) => {
  *
  * @returns {ParsedChannel[]} - Subset of channels corresponding to the current page.
  */
-export const getChannelsByPage = (channels: ParsedChannel[], page: number) => (
+export const getChannelsByPage = (channels: ParsedChannel[], page: number): ParsedChannel[] => (
   channels.slice(CHANNELS_PER_PAGE * (page - 1), CHANNELS_PER_PAGE * page)
 );

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import './ChannelList.css';
 import { ParsedChannel } from '../types/ParsedChannel';
 import ChannelCard from './ChannelCard';
@@ -14,7 +14,7 @@ const ChannelList: FC<Props> = ({
 }) => {
   return (
     <section className="channel-list">
-      {channels.map((channel, index) =>
+      {channels.map((channel, index): ReactElement =>
         <ChannelCard
           key={channel.key}
           channel={channel}

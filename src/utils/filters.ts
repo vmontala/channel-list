@@ -13,8 +13,8 @@ import { ALL_COUNTRIES } from '../config';
 const filterChannels = (
   channels: ParsedChannel[],
   filters: SearchFilters
-) => (
-  channels.filter((channel) => {
+): ParsedChannel[] => (
+  channels.filter((channel): boolean => {
     const { country } = filters;
     const termMatch = channel.label.indexOf(filters.term) !== -1;
     const countryMatch = country === ALL_COUNTRIES || country === channel.country;

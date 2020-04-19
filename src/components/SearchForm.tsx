@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, ChangeEvent} from 'react';
+import React, { FC, ReactElement, FormEvent, ChangeEvent } from 'react';
 import './SearchForm.css';
 import { ALL_COUNTRIES, DEFAULT_COUNTRY } from '../config';
 import countries from '../data/countries';
@@ -18,7 +18,7 @@ const SearchForm: FC<Props> = ({
    *
    * @returns {void}
    */
-  const onSearch = (event: FormEvent<HTMLFormElement>) => {
+  const onSearch = (event: FormEvent<HTMLFormElement>): void => {
     const element = event.currentTarget.elements!.namedItem('search-term');
 
     event.preventDefault();
@@ -36,7 +36,7 @@ const SearchForm: FC<Props> = ({
    *
    * @returns {void}
    */
-  const onChangeCountry = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onChangeCountry = (event: ChangeEvent<HTMLSelectElement>): void => {
     const element = event.currentTarget;
 
     if (element) {
@@ -68,7 +68,7 @@ const SearchForm: FC<Props> = ({
             onChange={onChangeCountry}
           >
             <option>{ALL_COUNTRIES}</option>
-            {countries.map(country => (
+            {countries.map((country): ReactElement => (
               <option
                 key={country.key || country.label}
                 value={country.key || country.label}

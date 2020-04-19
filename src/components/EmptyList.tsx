@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './Empty.css';
 
-const Empty = () => {
+const Empty = (): ReactElement => {
   return (
     <section className="empty-list">
       No channels found

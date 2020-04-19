@@ -12,7 +12,7 @@ import channelList from '../data/channel-list';
  *
  * @returns {ParsedChannel} - Parsed channel object.
  */
-const parseChannel = (channel: RawChannel, index: number) => ({
+const parseChannel = (channel: RawChannel, index: number): ParsedChannel => ({
   ...channel,
   key: `${channel.key}-${index}`,
   color: generateColor(),
@@ -26,8 +26,8 @@ const parseChannel = (channel: RawChannel, index: number) => ({
  *
  * @returns {ParsedChannel[]} - Parsed and sorted channel objects list.
  */
-const parseChannels = (channels: RawChannel[]) => (
-  channels.map(parseChannel).sort((a, b) => {
+const parseChannels = (channels: RawChannel[]): ParsedChannel[] => (
+  channels.map(parseChannel).sort((a, b): number => {
     if (a.label < b.label) {
       return -1;
     }
@@ -39,9 +39,9 @@ const parseChannels = (channels: RawChannel[]) => (
 /**
  * Loads the parsed and sorted channel objects list (if available) from the session storage.
  *
- * @returns {ParsedChannel[]} - Stored channel objects list.
+ * @returns {string} - Stored channel objects list in JSON.
  */
-const loadChannels = () => window.sessionStorage.getItem(CHANNEL_STORAGE_KEY);
+const loadChannels = (): string => window.sessionStorage.getItem(CHANNEL_STORAGE_KEY) || '';
 
 /**
  * Stores the parsed and sorted channel objects list to the session storage.
@@ -50,7 +50,7 @@ const loadChannels = () => window.sessionStorage.getItem(CHANNEL_STORAGE_KEY);
  *
  * @returns {void}
  */
-export const storeChannels = (channels: ParsedChannel[]) => (
+export const storeChannels = (channels: ParsedChannel[]): void => (
   window.sessionStorage.setItem(CHANNEL_STORAGE_KEY, JSON.stringify(channels))
 );
 
@@ -59,7 +59,7 @@ export const storeChannels = (channels: ParsedChannel[]) => (
  *
  * @returns {ParsedChannel[]} - Parsed and sorted channel objects list.
  */
-export const getChannelList = () => {
+export const getChannelList = (): ParsedChannel[] => {
   const storedChannels = loadChannels();
   let channels = null;
 
