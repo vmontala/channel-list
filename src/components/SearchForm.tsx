@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, FormEvent, ChangeEvent } from 'react';
+import React, { FC, ReactElement, useRef, FormEvent, ChangeEvent } from 'react';
 import './SearchForm.css';
 import { ALL_COUNTRIES, DEFAULT_COUNTRY } from '../config';
 import countries from '../data/countries';
@@ -10,6 +10,8 @@ interface Props {
 const SearchForm: FC<Props> = ({
   onFilter,
 }) => {
+  const searchTerm = useRef<HTMLInputElement>(null);
+
   /**
    * Triggered when submitting the search form that includes the search term input.
    * Prevents page refresh and sets the term filter on higher scope.
@@ -19,12 +21,10 @@ const SearchForm: FC<Props> = ({
    * @returns {void}
    */
   const onSearch = (event: FormEvent<HTMLFormElement>): void => {
-    const element = event.currentTarget.elements!.namedItem('search-term');
-
     event.preventDefault();
 
-    if (element) {
-      onFilter({ term: (element as HTMLInputElement).value });
+    if (searchTerm && searchTerm.current) {
+      onFilter({ term: searchTerm.current.value });
     }
   };
 
@@ -51,6 +51,7 @@ const SearchForm: FC<Props> = ({
           name="search-term"
           className="search-form__input"
           placeholder="Search for channels, e.g. Google"
+          ref={searchTerm}
         />
         <button className="search-form__button" type="submit">
           Search
